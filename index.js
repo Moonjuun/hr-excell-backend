@@ -17,11 +17,12 @@ const db = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT,
 });
 
 // 서버 실행
-app.listen(3030, () => {
-  console.log("Server is running on http://localhost:3030");
+app.listen(4000, () => {
+  console.log("Server is running on http://localhost:4000");
 });
 
 app.post("/api/excell/data", async (req, res) => {
@@ -102,7 +103,7 @@ app.post("/api/excell/data", async (req, res) => {
       }
     });
     await Promise.all(insertPromises);
-
+    console.log("데이터 Insert 완료");
     res.send("엑셀 데이터가 성공적으로 저장되었습니다.");
   } catch (error) {
     console.error("Error processing file:", error);
